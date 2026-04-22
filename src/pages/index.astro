@@ -1,50 +1,118 @@
----
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+﻿---
+const siteName = "BT&网盘资源站"
+const navList = [
+  { name: "🏠 首页", path: "/" },
+  { name: "🎬 电影", path: "/movie" },
+  { name: "📺 剧集", path: "/tv" },
+  { name: "🎌 动漫", path: "/anime" },
+  { name: "💻 软件", path: "/soft" },
+  { name: "📚 教程", path: "/study" },
+]
+
+const resourceList = [
+  {
+    title: "4K超清热门电影合集",
+    cate: "movie",
+    type: "BT磁力",
+    size: "320GB",
+    time: "2026-04-22",
+    link: "magnet:?xt=urn:btih:1234567890abcdef",
+    pwd: ""
+  },
+  {
+    title: "热播连续剧全集",
+    cate: "tv",
+    type: "网盘分享",
+    size: "180GB",
+    time: "2026-04-21",
+    link: "https://pan.baidu.com/s/xxxxxx",
+    pwd: "8866"
+  },
+  {
+    title: "2026新番动漫包",
+    cate: "anime",
+    type: "BT磁力",
+    size: "95GB",
+    time: "2026-04-20",
+    link: "magnet:?xt=urn:btih:abcdef1234567890",
+    pwd: ""
+  },
+  {
+    title: "精品装机软件合集",
+    cate: "soft",
+    type: "网盘分享",
+    size: "25GB",
+    time: "2026-04-19",
+    link: "https://pan.baidu.com/s/soft123",
+    pwd: "6688"
+  },
+  {
+    title: "Python自动化爬虫教程",
+    cate: "study",
+    type: "网盘分享",
+    size: "12GB",
+    time: "2026-04-18",
+    link: "https://pan.baidu.com/s/pydemo",
+    pwd: "2026"
+  }
+]
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{siteName}</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+    body{background:#0b0b0b;color:#e5e7eb;max-width:1100px;margin:0 auto;padding:15px}
+    .top-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .top-nav a{background:#1f2937;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;font-size:14px}
+    .top-nav a:hover{background:#2563eb}
+    .search-box{width:100%;padding:12px 15px;border-radius:8px;border:none;background:#1f2937;color:#fff;font-size:15px;margin-bottom:20px;outline:none}
+    .item{background:#161616;border-radius:10px;padding:18px;margin-bottom:15px;border:1px solid #222}
+    .item h3{color:#fff;margin-bottom:10px;font-size:16px}
+    .info-row{display:flex;gap:12px;font-size:12px;color:#aaa;margin-bottom:12px;flex-wrap:wrap}
+    .tag-bt{color:#4ade80;background:#162b1e;padding:2px 8px;border-radius:4px}
+    .tag-pan{color:#60a5fa;background:#16202b;padding:2px 8px;border-radius:4px}
+    .btn-group{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn-copy{background:#2563eb;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer}
+    .btn-link{background:#10b981;color:#fff;border:none;padding:8px 16px;border-radius:6px;text-decoration:none;font-size:14px}
+    .pwd-input{padding:7px;width:100px;border-radius:6px;border:none;background:#222;color:#fff;text-align:center}
+    .tips{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:10px 20px;border-radius:6px;display:none;z-index:999}
+  </style>
+</head>
+<body>
+  <div class="tips" id="copyTips">✅ 复制成功</div>
+  <div class="top-nav">
+    {navList.map(nav=><a href={nav.path}>{nav.name}</a>)}
+  </div>
+  <input class="search-box" id="searchInput" placeholder="🔍 搜索资源..." />
+  <div id="resourceList">
+    {resourceList.map(res=>(
+      <div class="item" data-title={res.title.toLowerCase()}>
+        <h3>{res.title}</h3>
+        <div class="info-row">
+          <span class={res.type==="BT磁力"?"tag-bt":"tag-pan"}>{res.type}</span>
+          <span>📦{res.size}</span>
+          <span>📅{res.time}</span>
+        </div>
+        <div class="btn-group">
+          <button class="btn-copy" onclick="copyLink('{res.link}')">📋复制链接</button>
+          {res.pwd && (
+            <>
+              <input class="pwd-input" value={res.pwd} readonly/>
+              <a class="btn-link" href={res.link} target="_blank">🔗打开网盘</a>
+            </>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+
+<script>
+function copyLink(t){navigator.clipboard.writeText(t);let e=document.getElementById("copyTips");e.style.display="block",setTimeout(()=>e.style.display="none",1500)}
+const i=document.getElementById("searchInput"),s=document.querySelectorAll(".item");i.oninput=()=>{let e=i.value.toLowerCase();s.forEach(t=>{t.style.display=t.dataset.title.includes(e)?"":"none"})}
+</script>
+</body>
 </html>
