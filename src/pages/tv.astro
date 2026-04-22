@@ -1,0 +1,34 @@
+﻿---
+const siteName = "剧集资源"
+const navList = [{name:"🏠首页",path:"/"},{name:"🎬电影",path:"/movie"},{name:"📺剧集",path:"/tv"},{name:"🎌动漫",path:"/anime"},{name:"💻软件",path:"/soft"},{name:"📚教程",path:"/study"}]
+const resourceList = [
+  {title:"热播连续剧全集",cate:"tv",type:"网盘分享",size:"180GB",time:"2026-04-21",link:"https://pan.baidu.com/s/xxxxxx",pwd:"8866"},
+  {title:"经典国产剧合集",cate:"tv",type:"BT磁力",size:"240GB",time:"2026-04-21",link:"magnet:?xt=urn:btih:tvabc123",pwd:""}
+]
+---
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>剧集资源 | BT网盘</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#0b0b0b;color:#e5e7eb;max-width:1100px;margin:0 auto;padding:15px}.top-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.top-nav a{background:#1f2937;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;font-size:14px}.top-nav a:hover{background:#2563eb}.search-box{width:100%;padding:12px 15px;border-radius:8px;border:none;background:#1f2937;color:#fff;font-size:15px;margin-bottom:20px;outline:none}.item{background:#161616;border-radius:10px;padding:18px;margin-bottom:15px;border:1px solid #222}.item h3{color:#fff;margin-bottom:10px;font-size:16px}.info-row{display:flex;gap:12px;font-size:12px;color:#aaa;margin-bottom:12px;flex-wrap:wrap}.tag-bt{color:#4ade80;background:#162b1e;padding:2px 8px;border-radius:4px}.tag-pan{color:#60a5fa;background:#16202b;padding:2px 8px;border-radius:4px}.btn-group{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn-copy{background:#2563eb;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer}.btn-link{background:#10b981;color:#fff;border:none;padding:8px 16px;border-radius:6px;text-decoration:none;font-size:14px}.pwd-input{padding:7px;width:100px;border-radius:6px;border:none;background:#222;color:#fff;text-align:center}.tips{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:10px 20px;border-radius:6px;display:none;z-index:999}</style>
+</head>
+<body>
+<div class="tips" id="copyTips">✅复制成功</div>
+<div class="top-nav">{navList.map(n=><a href={n.path}>{n.name}</a>)}</div>
+<input class="search-box" id="searchInput" placeholder="🔍搜索剧集..." />
+<div id="resourceList">{resourceList.map(r=>(<div class="item" data-title={r.title.toLowerCase()}>
+<h3>{r.title}</h3>
+<div class="info-row">
+<span class={r.type==="BT磁力"?"tag-bt":"tag-pan"}>{r.type}</span>
+<span>📦{r.size}</span><span>📅{r.time}</span>
+</div>
+<div class="btn-group">
+<button class="btn-copy" onclick="copyLink('{r.link}')">📋复制</button>
+{r.pwd && (<><input class="pwd-input" value={r.pwd} readonly/><a class="btn-link" href={r.link} target="_blank">🔗网盘</a></>)}
+</div>
+</div>))}</div>
+<script>
+function copyLink(t){navigator.clipboard.writeText(t);let e=document.getElementById("copyTips");e.style.display="block";setTimeout(()=>e.style.display="none",1500)}
+const i=document.getElementById("searchInput"),l=document.querySelectorAll(".item");i.oninput=()=>{let k=i.value.toLowerCase();l.forEach(e=>{e.style.display=e.dataset.title.includes(k)?"":"none"})}
+</script>
+</body>
+</html>
